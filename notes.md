@@ -68,7 +68,7 @@ solve the degradation problem
 
 可以使用MS-Res-SNN方式训练非常深的Att-Res-SNN
 
-#### Contributions
+### Contributions
 
 ##### Multi-dimensional Attention SNN
 
@@ -89,4 +89,78 @@ improvement of sparsity (inhibiting the membrane potentials)
 梯度范数相等
 
 将注意力添加到MS-Res-SNN，解决一般SNN中的退化问题
+
+##### 三种attention模块构建
+
+在本文中
+$$
+x_{Att}=f(g(x),x)
+$$
+写作
+$$
+x_{Att}=g(x)\cdot x
+$$
+
+######  Temporal-wise Attention (TA)
+
+$$
+X_{TA}^{n}=g_{t}(X^{n})\odot X^{n}
+$$
+
+where
+$$
+X_{TA}^{n}=\left[\cdots,X_{TA}^{t,n},\cdots\right]\in\mathbb{R}^{T\times c_{n}\times h_{n}\times w_{n}}
+$$
+使用CBAM的方式
+$$
+\begin{aligned}
+g_{t}(\boldsymbol{X}^{n})=& \sigma\left(\boldsymbol{W}_{t1}^{n}(\mathrm{ReLU}(\boldsymbol{W}_{t0}^{n}(\mathrm{AvgPool}(\boldsymbol{X}^{n})))\right)  \\
+&+\boldsymbol{W}_{t1}^n(\operatorname{ReLU}(\boldsymbol{W}_{t0}^n(\operatorname{MaxPool}(\boldsymbol{X}^n)))))
+\end{aligned}
+$$
+where
+$$
+\mathrm{AvgPool}(\boldsymbol{X}^{n}),\mathrm{MaxPool}(\boldsymbol{X}^{n})\in\mathbb{R}^{T\times1\times1\times1}
+$$
+
+###### Channel-wise Attention (CA)
+
+$$
+U_{CA}^{t,n}=g_{c}(U^{t,n})\odot U^{t,n}
+$$
+
+where
+$$
+\begin{aligned}
+g_{c}(\boldsymbol{U}^{t,n})=& \sigma\left(\boldsymbol{W}_{c1}^{n}(\mathrm{ReLU}(\boldsymbol{W}_{c0}^{n}(\mathrm{AvgPool}(\boldsymbol{U}^{t,n})))\right)  \\
+&+\boldsymbol{W}_{c1}^n(\operatorname{ReLU}(\boldsymbol{W}_{c0}^n(\operatorname{MaxPool}(\boldsymbol{U}^{t,n})))))
+\end{aligned}
+$$
+
+###### Spatial-wise Attention (SA)
+
+$$
+U_{SA}^{t,n}=g_{s}(U^{t,n})\odot U^{t,n}
+$$
+
+where
+$$
+g_{s}(\boldsymbol{U}^{t,n})=\sigma\left(f^{7\times7}([\mathrm{AvgPool}(\boldsymbol{U}^{t,n});\mathrm{MaxPool}(\boldsymbol{U}^{t,n})])\right)
+$$
+$f^{7\times7}$represents a convolution operation with the filter size of 7 × 7
+
+![image](https://github.com/hamingsi/papers_notes/raw/main/pictures/fig1.png)
+
+最终的TCSA-SNN层表示如下：
+$$
+\begin{aligned}
+&\boldsymbol{X}_{TA}^{n}=g_{t}(\boldsymbol{X}^{n})\odot\boldsymbol{X}^{n}, \\
+&U_{CA}^{t,n}=g_{c}(\boldsymbol{H}^{t-1,n}+\boldsymbol{X}_{TA}^{t,n})\odot(\boldsymbol{H}^{t-1,n}+\boldsymbol{X}_{TA}^{t,n}) \\
+&\boldsymbol{U}^{t,n}=g_{s}(\boldsymbol{U}_{CA}^{t,n})\odot\boldsymbol{U}_{CA}^{t,n}.
+\end{aligned}
+$$
+
+##### Att-Res-SNN结构
+
+有两种结构，一种是在SA之后加入original input 一种是在CA前加入original input
 
