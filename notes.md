@@ -164,3 +164,27 @@ $$
 
 有两种结构，一种是在SA之后加入original input 一种是在CA前加入original input
 
+![fig2](https://github.com/hamingsi/papers_notes/raw/main/pictures/fig2.png)
+
+两中可以分别表示为：
+
+Att-Res-SNN-1：
+$$
+\begin{array}{l}\boldsymbol{U}_{CA}^{t,n+1}=g_c(\boldsymbol{U}_{Ori}^{t,n+1})\odot\boldsymbol{U}_{Ori}^{t,n+1},\\\boldsymbol{U}_{CSA}^{t,n+1}=g_s(\boldsymbol{U}_{CA}^{t,n+1})\odot\boldsymbol{U}_{CA}^{t,n+1},\\\boldsymbol{U}^{t,n+1}=\boldsymbol{U}_{CSA}^{t,n+1}+\boldsymbol{U}^{t,n-1},\end{array}
+$$
+Att-Res-SNN-2：
+$$
+\begin{aligned}
+&U_{CA}^{t,n+1} =g_{c}(\boldsymbol{U}_{\textit{Or}i}^{t,n+1}+\boldsymbol{U}^{t,n-1})\odot(\boldsymbol{U}_{\textit{Or}i}^{t,n+1}+\boldsymbol{U}^{t,n-1}),  \\
+&U_{CSA}^{t,n+1} =g_{s}(\boldsymbol{U}_{CA}^{t,n+1})\odot\boldsymbol{U}_{CA}^{t,n+1},  \\
+&U^{t,n+1} =U_{CSA}^{t,n+1}, 
+\end{aligned}
+$$
+可以使用不同的attention方式：
+
+CBAM，ECANet，SimAM
+
+本文用到的是CBAM
+
+## SPIKFORMER: WHEN SPIKING NEURAL NETWORKMEETS TRANSFORMER
+
