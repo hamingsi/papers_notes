@@ -81,10 +81,13 @@ $$
 \mathtt{clip}(x,-1,1)=\max(-1,\min(1,x)).
 $$
 
+![fig2](https://github.com/hamingsi/papers_notes/raw/9611d80c7551d5b405a0b8b40cd8835e3299206a/pictures/BNN/fig2.png)
+
 #### Binary Neural Networks
 
 ##### Naive Binary Neural Networks
 
+(BinaryConnect)
 $$
 w_b=\begin{cases}&+1,&\text{with probability }p=\hat{\sigma}(w)\\&-1,&\text{with probability }1-p\end{cases}
 $$
@@ -94,6 +97,8 @@ where $\sigma$ is the“hard sigmoid”function:
 $$
 \hat{\sigma}(x)=\mathsf{clip}(\frac{x+1}2,0,1)=\operatorname*{max}(0,\operatorname*{min}(1,\frac{x+1}2))
 $$
+
+Binarized Neural Network (BNN) 证明了二元神经网络理论和实践上的实用性和加速能力
 
 ##### Optimization Based Binary Neural Networks
 
