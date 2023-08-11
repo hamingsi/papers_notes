@@ -112,7 +112,7 @@ $$
 $$
 Wide Reduced-Precision Networks (WRPN)  that also minimize the quantization error in a similar way to XNOR-Net, but **increase the number of filters in each layer.**
 
-(HORQ)generates the final quantized activation by a **linear combination of the approximation in each recursive step.**
+High-Order Residual Quantization (HORQ) generates the final quantized activation by a **linear combination of the approximation in each recursive step.**
 
 ABC-Net  that **linearly combines multiple binary weight matrices and scaling factors** to fit the full-precision weights and activations, which can largely reduce the information loss caused by binarization.
 
@@ -124,7 +124,7 @@ PArameterized Clipping Activation (PACT) [74] with a **learnable upper bound** f
 
 ###### Improve the Network Loss Function
 
-finding the desired network loss function that can guide the learning of the network parameters with restrictions brought by binarization.
+Regularizing Activation Distribution finding the desired network loss function that can guide the learning of the network parameters with restrictions brought by binarization.
 
 distribution loss
 $$
@@ -137,6 +137,8 @@ $$
 \mathcal{L}\left(x;\mathbf{w}^T,\mathbf{b}_\mathbf{w}^S\right)=\alpha\mathcal{H}\left(y,p^T\right)+\beta\mathcal{H}\left(y,p^S\right)+\gamma\mathcal{H}\left(z^T,p^S\right)
 $$
 where $w^T$ and $b^S_w$ are the full-precision weights of the teacher model and binary weights of the student (apprentice) model respectively, y is the label for samplex, H(·) is the soft and hard label loss function between the teacher and apprentice model, and α, β, γ are the weighting factors, $p^T$ and $p^S$ are the predictions of the teacher and student model, respectively.
+
+![fig3](https://github.com/hamingsi/papers_notes/raw/69e4016efcd7114d5b96675e158c69c58c3d8055/pictures/BNN/fig3.png)
 
 ###### Reduce the Gradient Error
 
