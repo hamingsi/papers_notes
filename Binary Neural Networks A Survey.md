@@ -12,6 +12,8 @@
 
 ###### approaches for compressing the deep networks can be classified into five categories
 
+压缩网络就是这5种方法
+
 参数剪枝和量化主要侧重于通过去除冗余/非关键参数或压缩参数空间（例如，从浮点权重到整数权重）来分别消除模型参数中的冗余。
 
 低秩分解应用矩阵/张量分解技术使用小尺寸的代理来估计信息参数。
@@ -48,7 +50,9 @@
 
 naive binarization without optimizing the quantization function
 
-the optimized binarization including minimizing quantization error
+the optimized binarization including 
+
+minimizing quantization error
 
 improving the loss function
 
@@ -69,6 +73,8 @@ $$
 \mathbf{z}=\sigma(Q_{w}(\mathbf{w})\otimes Q_{a}(\mathbf{a}))=\sigma(\alpha\beta(\mathbf{b_{w}\odot b_{a}}))
 $$
 XNOR-bitcount
+
+![fig1](https://github.com/hamingsi/papers_notes/raw/81a68a30e8a7aeb7337a92bb64e5a5adecf7abde/pictures/BNN/fig1.png)
 
 use STE function(sign function vanishes) to BP
 $$
