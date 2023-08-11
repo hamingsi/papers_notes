@@ -155,13 +155,15 @@ $$
 
 Binary Neural Networks+ (BNN+)直接提出了改进的sign function导数近似，该函数鼓励二进制周围学习权重
 
-good quantization functions in forward propagation
+good quantization functions in forward propagation减少梯度误差
 
 **Differential Soft Quantization (DSQ)** method replacing the traditional quantization function with a soft quantization function
 $$
 \varphi(x)=s\tanh\left(k\left(x-m_i\right)\right),\quad\mathrm{if}\quad x\in\mathcal{P}_i
 $$
 where k determines the shape of the asymptotic function, s is a scaling factor to make the soft quantization function smooth and mi is the center of the interval Pi.
+
+![fig4](https://github.com/hamingsi/papers_notes/raw/478f56ea06eba01e9bae3337d4f8f616fdc876d8/pictures/BNN/fig4.png)
 
 IR-Net provided a new perspective for improving BNNs that retaining **both forward and backward information** is crucial for accurate BNNs, and it is **the first to** design BNNs considering both forward and backward information retention
 
@@ -226,8 +228,24 @@ XNOR-Net 提出了 smooth transition  addition shortcuts scale factors
 
 ##### Future Trend and Conclusions
 
-在前向和反向中保留好信息
+1.在前向和反向中保留好信息
 
-customizing or transferring binary networks for different tasks, designing hardware-friendly or energy-economic binarization algorithms, etc.
+2.customizing or transferring binary networks for different tasks, designing hardware-friendly or energy-economic binarization algorithms, etc.
 
-8-bit训练的可能性
+3.8-bit训练的可能性
+
+
+
+
+
+Binarized Neural Networks
+
+XNOR-Net: ImageNet Classification Using Binary Convolutional Neural Networks
+
+Bi-Real Net: Enhancing the Performance of 1-bit CNNs With Improved Representational Capability and Advanced Training Algorithm
+
+Estimating or propagating gradients through stochastic neurons for conditional computation
+
+(gradient problem occurring when training deep networks binarized by sign function)
+
+BinaryConnect: Training Deep Neural Networks with binary weights during propagations
